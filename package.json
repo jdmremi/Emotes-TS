@@ -1,0 +1,22 @@
+{
+  "name": "emotes-rewrite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && node App.js"
+  },
+  "author": "Vezqi",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^14.14.37",
+    "eslint": "^7.24.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "discord.js": "^12.5.3",
+    "dotenv": "^8.2.0",
+    "got": "^11.8.2"
+  }
+}
