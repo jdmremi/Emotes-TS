@@ -1,7 +1,11 @@
 export default interface ICommand {
-    name: string;
-    usage: string;
-    description: string;
-    aliases: string[];
-    run?(): void;
+    cmdName?: string;
+    usage?: string;
+    description?: string;
+    aliases?: string[];
+    args?: boolean;
+    needsArgs?: boolean;
+    WIP?: boolean;
+    adminOnly?: boolean;
+    run?(): any;
 }

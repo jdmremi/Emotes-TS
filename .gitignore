@@ -1,4 +1,9 @@
+# Files
 /*/*.js
 *.js
 .env
+
+# Folders
 /node_modules
+/images
+/duplicates

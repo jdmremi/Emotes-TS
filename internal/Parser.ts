@@ -1,9 +1,7 @@
-import { type } from "node:os";
 import Emote from "../models/Emote"
 const emoteRegex: RegExp = /<(a)?:([a-zA-Z0-9_]{2,32}):(\d{1,20})>/g;
 
-// Should we just have this download all emotes as well? Or should we have a separate function?
-
+// We should have this ONLY create an array of unique objects to preserve resources.
 export default async function parseEmotes(str: string): Promise<Emote[]> {
     let emotes: Array<Emote> = [];
     let match;
@@ -14,8 +12,7 @@ export default async function parseEmotes(str: string): Promise<Emote[]> {
         let name: string = match[2],
             id: string = match[3];
 
-        let e: Emote = new Emote(name, id, extension);
-        emotes.push(e);
+        emotes.push(new Emote(name, id, extension));
         
     }
 
