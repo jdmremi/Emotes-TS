@@ -22,15 +22,10 @@ export default async function RunMessage(message: Message, commands: CommandMap)
         const args: string[] = message.content.slice(prefix.length).split(/\s+/),
             commandName = args.shift()?.toLowerCase();
 
-        if(!commandName) return;
-
-        console.log(args);
-
+        if (!commandName) return;
         if (!commands.has(commandName)) return;
 
         const cmd = commands.get(commandName);
-
-        console.log(cmd);
 
         if (!cmd) return;
 
