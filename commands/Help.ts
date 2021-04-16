@@ -10,7 +10,7 @@ export default class Help implements ICommand {
     cmdName: string = "Help";
     usage: string = "[command]";
     description: string = "List of all the commands or info about a specified command.";
-    aliases: string[] = ["help"];
+    aliases: string[] = [];
     args: boolean = false;
     needsArgs: boolean = false;
     adminOnly: boolean = false;
