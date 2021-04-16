@@ -5,7 +5,7 @@
   "main": "App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && node App.js"
+    "build": "tsc --build --clean && tsc && node App.js"
   },
   "author": "Vezqi",
   "license": "ISC",
@@ -14,9 +14,11 @@
     "eslint": "^7.24.0"
   },
   "dependencies": {
+    "@types/sqlite3": "^3.1.7",
     "axios": "^0.21.1",
     "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
-    "got": "^11.8.2"
+    "got": "^11.8.2",
+    "sqlite3": "^5.0.2"
   }
 }

@@ -12,7 +12,10 @@ export default async function parseEmotes(str: string): Promise<Emote[]> {
         let name: string = match[2],
             id: string = match[3];
 
-        emotes.push(new Emote(name, id, extension));
+        // Remove if breaks. This ensures that there are no duplicate emoets in the array.
+        if(!emotes.some((e) => e.id === id)) {
+            emotes.push(new Emote(name, id, extension));
+        }
         
     }
 

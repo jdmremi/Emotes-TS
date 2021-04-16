@@ -1,33 +1,30 @@
-import { Client, Collection, Message } from "discord.js"
+import { Client, Message } from "discord.js"
 
 import fs from "fs"
 import "dotenv/config"
 
 import RunMessage from './listeners/Message'
 import RunReady from './listeners/Ready'
+import ICommand from "./interfaces/ICommand"
+import CommandMap from "./internal/CommandMap"
 
-let commandFiles: string[] = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'));
-let client: Client = new Client();
+const commandFiles: string[] = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'));
+const client: Client = new Client();
+const commands: CommandMap = new CommandMap();
 
-let commands = new Map();
-
-for(var _cmd of commandFiles) {
-
-    import(`./commands/${_cmd}`).then((c) => {
-        let command = c.default;
-        commands.set(command.cmdName.toLowerCase(), {
-            aliases: command.aliases,
-            command: command
-        });
+commandFiles.forEach((cmd) => {
+    import(`./commands/${cmd}`).then((c) => {
+        const command: ICommand = new c.default();
+        commands.add(command);
     });
-}
-
-client.on('ready', async() => {
-    await RunReady(client);
 });
 
-client.on('message', async(message: Message) => {
-    await RunMessage(message, commands);
+client.on('ready', async () => {
+    RunReady(client);
+});
+
+client.on('message', async (message: Message) => {
+    RunMessage(message, commands);
 });
 
 client.login(process.env.token);

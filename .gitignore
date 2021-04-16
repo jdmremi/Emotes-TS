@@ -2,6 +2,7 @@
 /*/*.js
 *.js
 .env
+*.db
 
 # Folders
 /node_modules
