@@ -1,4 +1,4 @@
 export enum Directories {
-    EmoteDir = "./images",
-    DupeDir = "./duplicates"
+    EmoteDir = "./images/",
+    DupeDir = "./duplicates/"
 }
