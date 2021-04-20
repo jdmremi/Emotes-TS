@@ -1,11 +1,12 @@
 import ICommand from "../interfaces/ICommand";
 import { Message } from "discord.js";
 import Database from "../internal/Database";
+import { Directories } from "../enums/Directories";
 
 export default class RandomEmote implements ICommand {
     cmdName: string = "Random";
     usage: string = "[name]";
-    description: string = "Sends a random emote. Query optional.";
+    description: string = "Sends a random emote.";
     aliases: string[] = ["randomemote"];
     args: boolean = false;
     needsArgs: boolean = false;
@@ -13,9 +14,14 @@ export default class RandomEmote implements ICommand {
     WIP: boolean = false;
 
     async run(message: Message, args: string[]) {
-        // Get file from disk and send.
         let randomEmote = await Database.getRandom();
-        await message.channel.send(randomEmote[0].name);
+        let emoteName = randomEmote[0].name.split('.')[0];
+        await message.channel.send(`**${emoteName}**`, {
+            files: [{
+                attachment: Directories.EmoteDir + randomEmote[0].name,
+                name: emoteName
+            }]
+        });
     }
 
 }
