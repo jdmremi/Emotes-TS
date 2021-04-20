@@ -10,12 +10,12 @@ const prefix: string = <string>process.env.prefix;
 
 export default async function RunMessage(message: Message, commands: CommandMap): Promise<void> {
 
-    let messageEmotes: Emote[] = await parseEmotes(message.content);
+    /*let messageEmotes: Emote[] = await parseEmotes(message.content);
 
     await Promise.all(messageEmotes.map(async(emote) => {
         let downloaded = await emote.download();
         console.log(downloaded.name);
-    }));
+    }));*/
 
     if (message.content.startsWith(prefix)) {
         console.log('Starts with prefix!');
