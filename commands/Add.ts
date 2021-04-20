@@ -67,7 +67,7 @@ export default class Add implements ICommand {
                                 }
 
                                 break;
-                            case Regexes.EmoteOrMany: // Debug this shit
+                            case Regexes.EmoteOrMany:
                                 let emotes = await parseEmotes(msg);
 
                                 await Promise.all(emotes.map(async (emote) => {
@@ -107,7 +107,6 @@ export default class Add implements ICommand {
                                 }
 
                                 break;
-                                // 
                             case Regexes.NameAndEmote:
                                 emoteName = match[1];
                                 let parsed = await parseEmotes(match[0]);
