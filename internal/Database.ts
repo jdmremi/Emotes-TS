@@ -33,6 +33,25 @@ export default class Database {
         });
     }
 
+    static getRandom(): Promise<any> {
+        return new Promise((res, rej) => {
+            db.all(`SELECT element, name FROM newemotes ORDER BY RANDOM() LIMIT 1`, (err, row) => {
+                if (err) rej(err);
+                res(row);
+            });
+        });
+    }
+
+    static getEmoteById(id: string): Promise<any> {
+        id = Utils.sqlEscape(id);
+        return new Promise((res, rej) => {
+            db.all(`SELECT name FROM newemotes WHERE element = ?`, [id], (err, row) => {
+                if(err) rej(err);
+                res(row);
+            });
+        });
+    }
+
     static async searchAll(query: string) {
         let q: string = Utils.sqlEscape(query);
         let emotes = await this.searchEmotes(q);
@@ -42,12 +61,4 @@ export default class Database {
 
     }
 
-    static async getRandom(): Promise<any> {
-        return new Promise((res, rej) => {
-            db.all(`SELECT element, name FROM newemotes ORDER BY RANDOM() LIMIT 1`, (err, row) => {
-                if (err) rej(err);
-                res(row);
-            });
-        });
-    }
 }
