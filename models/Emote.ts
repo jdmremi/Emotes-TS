@@ -25,9 +25,9 @@ export default class Emote {
 
     async download() {
 
-        if (fs.existsSync(`${Directories.EmoteDir}/${this.name}${this.extension}`)) {
-            if (!fs.existsSync(`${Directories.DupeDir}/${this.name}@${this.id}${this.extension}`)) {
-                let downloadedDupe: any = await this._download(`${Directories.DupeDir}/${this.name}@${this.id}${this.extension}`);
+        if (fs.existsSync(`${Directories.EmoteDir}${this.name}${this.extension}`)) {
+            if (!fs.existsSync(`${Directories.DupeDir}${this.name}@${this.id}${this.extension}`)) {
+                let downloadedDupe: any = await this._download(`${Directories.DupeDir}${this.name}@${this.id}${this.extension}`);
                 Object.assign(downloadedDupe, {
                     duplicate: true
                 });
@@ -41,7 +41,7 @@ export default class Emote {
             });
             
         } else {
-            let downloadedEmote: any = await this._download(`${Directories.EmoteDir}/${this.name}${this.extension}`);
+            let downloadedEmote: any = await this._download(`${Directories.EmoteDir}${this.name}${this.extension}`);
             Object.assign(downloadedEmote, {
                 duplicate: false
             });
