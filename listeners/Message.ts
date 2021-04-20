@@ -10,12 +10,12 @@ const prefix: string = <string>process.env.prefix;
 
 export default async function RunMessage(message: Message, commands: CommandMap): Promise<void> {
 
-    /*let messageEmotes: Emote[] = await parseEmotes(message.content);
+    let messageEmotes: Emote[] = await parseEmotes(message.content);
 
-    messageEmotes.forEach(async (e: Emote) => {
-        let downloaded = await e.download();
-        console.log(downloaded);
-    });*/
+    await Promise.all(messageEmotes.map(async(emote) => {
+        let downloaded = await emote.download();
+        console.log(downloaded.name);
+    }));
 
     if (message.content.startsWith(prefix)) {
         console.log('Starts with prefix!');
@@ -30,9 +30,9 @@ export default async function RunMessage(message: Message, commands: CommandMap)
         if (!cmd) return;
 
         if (cmd.args && !args.length && cmd.needsArgs) {
-            let reply = `Command needs args to run, ${message.author.username} :(\n`;
+            let reply = `Command needs args to run, ${message.author.username}! :(\n`;
             if (cmd.usage) {
-                reply += `\nUsage: ${prefix}${cmd.cmdName} ${cmd.aliases.length >= 1 ? (`aliases: ` + cmd.aliases.join(' ')) : ''} ${cmd.usage}`;
+                reply += `\nUsage: \`${prefix}${cmd.cmdName.toLowerCase()} ${cmd.usage}\` ${cmd.aliases.length >= 1 ? (`\n\nAliases: \`${prefix}${cmd.aliases.join(' ')}\``) : ''}`;
             }
 
             await message.channel.send(reply);
