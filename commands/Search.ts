@@ -23,8 +23,7 @@ export default class Search implements ICommand {
         let messageToSendBody: string = '';
 
         if(emotes.length === 0) {
-            await message.reply('no emotes found with that query. :(');
-            return;
+            return await message.reply('no emotes found with that query. :(');
         }
 
         for(var emote of emotes) {
