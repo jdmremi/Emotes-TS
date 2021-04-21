@@ -33,7 +33,7 @@ export default class Help implements ICommand {
 
             data.push(`**Name:** ${command?.cmdName}`);
             if (command?.description) data.push(`**Description:** ${command.description}`);
-            if (command?.usage) data.push(`**Usage:** ${prefix}${command.cmdName} ${command.usage}`);
+            if (command?.usage) data.push(`**Usage:** ${prefix}${command.cmdName.toLowerCase()} ${command.usage}`);
 
 
         }
