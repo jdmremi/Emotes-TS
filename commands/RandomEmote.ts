@@ -19,7 +19,7 @@ export default class RandomEmote implements ICommand {
         await message.channel.send(`**${emoteName}**`, {
             files: [{
                 attachment: Directories.EmoteDir + randomEmote[0].name,
-                name: emoteName
+                name: randomEmote[0].name
             }]
         });
     }
