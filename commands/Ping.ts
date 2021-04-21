@@ -12,7 +12,10 @@ export default class Ping implements ICommand {
     WIP: boolean = false;
 
     async run(message: Message, args: string[]) {
-        return await message.channel.send("Pong!");
+        let sent = await message.channel.send("Pong!");
+        let ping = sent.createdTimestamp - message.createdTimestamp;
+        return await sent.edit(`Pong! Latency is ${ping}ms.`);
+        
     }
 
 }
