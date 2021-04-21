@@ -54,7 +54,7 @@ export default class Add implements ICommand {
 
                         switch (type) {
                             case Regexes.IdOnly:
-                                emoteId = msg[0];
+                                emoteId = msg;
                                 databaseEmote = await Database.getEmoteById(emoteId); // [{ name: 'emote.extension'}]
                                 emoteName = databaseEmote[0].name.split('.')[0];
                                 fileName = databaseEmote[0].name;
