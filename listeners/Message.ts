@@ -18,7 +18,6 @@ export default async function RunMessage(message: Message, commands: CommandMap)
     }));*/
 
     if (message.content.startsWith(prefix)) {
-        console.log('Starts with prefix!');
         const args: string[] = message.content.slice(prefix.length).split(/\s+/),
             commandName = args.shift()?.toLowerCase();
 
