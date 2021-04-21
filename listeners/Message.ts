@@ -2,7 +2,6 @@ import { Message } from "discord.js";
 import parseEmotes from "../internal/Parser";
 import Emote from "../models/Emote";
 import CommandMap from "../internal/CommandMap";
-import ICommand from "../interfaces/ICommand";
 
 import "dotenv/config"
 
@@ -27,6 +26,11 @@ export default async function RunMessage(message: Message, commands: CommandMap)
         const cmd = commands.get(commandName);
 
         if (!cmd) return;
+
+        if(cmd.WIP) {
+            await message.reply('that command is a work in progress.');
+            return;
+        }
 
         if (cmd.args && !args.length && cmd.needsArgs) {
             let reply = `Command needs args to run, ${message.author.username}! :(\n`;
