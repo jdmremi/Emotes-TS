@@ -28,7 +28,12 @@ export default async function RunMessage(message: Message, commands: CommandMap)
         if (!cmd) return;
 
         if(cmd.WIP) {
-            await message.reply('that command is a work in progress.');
+           await message.reply('that command is a work in progress.');
+           return;
+        }
+
+        if(cmd.adminOnly) {
+            await message.reply('that command is set to admin only.');
             return;
         }
 
