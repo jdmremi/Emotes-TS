@@ -6,12 +6,11 @@ Currently a work in progress. Soon to allow users to perform a variety of operat
 
 Feel free to contribute however you'd like to this repository. 
 
-Make sure you have Node.js and npm installed on your system. `cd` into the cloned repo and type `npm i` to install the project's dependencies. You might need to run `npm i typescript`.
+Make sure you have Node.js and npm installed on your system. `cd` into the cloned repo and type `npm i` to install the project's dependencies. You might also need to run `npm i typescript`.
 
-Once you have made changes, run `npm run build` to clean the project, transpile it, and have it run `App.js` which is this project's entry point.
+Once you have made changes, run `npm run build`. This cleans the project, compiles it, and then runs `App.js` which is this project's entry point.
 
 For commands, just create a class that implements [ICommand](https://github.com/Vezqi/Emotes-TS/blob/master/interfaces/ICommand.ts).
-
 
 # Commands
 
