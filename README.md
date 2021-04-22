@@ -2,6 +2,17 @@
 
 Currently a work in progress. Soon to allow users to perform a variety of operations on emotes and operate on data from a data science perspective.
 
+# Contributing
+
+Feel free to contribute however you'd like to this repository. 
+
+Make sure you have Node.js and npm installed on your system. `cd` into the cloned repo and type `npm i` to install the project's dependencies. You might need to run `npm i typescript`.
+
+Once you have made changes, run `npm run build` to clean the project, transpile it, and have it run `App.js` which is this project's entry point.
+
+For commands, just create a class that implements [ICommand](https://github.com/Vezqi/Emotes-TS/blob/master/interfaces/ICommand.ts).
+
+
 # Commands
 
 Bot uses `..` as its prefix. All commands must be invoked with the prefix and then the command name, or a command's alias if available.
