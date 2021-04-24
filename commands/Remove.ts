@@ -1,9 +1,9 @@
+import { Message } from "discord.js";
 import ICommand from "../interfaces/ICommand";
-import { Client, Message } from "discord.js";
 
 export default class Remove implements ICommand {
     cmdName: string = "Remove";
-    usage: string = "[emote]";
+    usage: string = "[emote name]";
     description: string = "Removes the given emoji";
     aliases: string[] = [];
     args: boolean = true;
@@ -12,24 +12,14 @@ export default class Remove implements ICommand {
     WIP: boolean = false;
 
     async run(message: Message, args: string[]) {
-        if (args.length == 1) {
-            let emoteName = args[0];
-            var removed = this._deleteEmoteToServer(message, args[0]);
-            return await message.reply("successfully removed :${removed}:.");
-        } else {//requires more than one argument
-            var total:number = 0;
-            while(args.length != total) {
-                let emoteName = args[total];
-                var removed = this._deleteEmoteToServer(message, emoteName); 
-                total++;
-            }
-            return await message.reply("successfully removed **${total}** emotes.")
-        } //set needsArgs: boolean = true; in case the user does not send arguments
+        let target = args[0];
+        let deleted = await this._deleteFromServer(message, target);
+
+        await message.reply(`successfully deleted that emoji. (${deleted?.name})`);
     }
 
-    private _deleteEmoteToServer(message: Message, data: any): Promise<GuildEmoji> | undefined {
-        var emoteID:string = Client.emojis.find(emoji => emoji.name === data);
-        return message.guild.emojis.resolve(emoteID).delete();
+    private async _deleteFromServer(message: Message, emoteName: string) {
+        return message.guild?.emojis.cache.find((emoji) => emoji.name === emoteName)?.delete();
     }
 
 }
