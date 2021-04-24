@@ -4,11 +4,11 @@ import ICommand from "../interfaces/ICommand";
 export default class Remove implements ICommand {
     cmdName: string = "Remove";
     usage: string = "[emote name]";
-    description: string = "Removes the given emoji";
+    description: string = "Removes a given emote";
     aliases: string[] = [];
     args: boolean = true;
     needsArgs: boolean = true;
-    adminOnly: boolean = false;
+    adminOnly: boolean = true;
     WIP: boolean = false;
 
     async run(message: Message, args: string[]) {
