@@ -88,6 +88,11 @@ export default class ImageUtils {
         we need to extract the first frame from the gif and use that as our
         buffer instead of the gif buffer itself.
     */
+    /**
+     * Get the average color of an image.
+     * @param {string} file - string - The path to the image file.
+     * @returns The average color of the image.
+     */
     public static async getAverageColor(file: string): Promise<IFastAverageColorResult | undefined> {
         if (fs.existsSync(file)) {
             let buffer: Buffer = file.includes(".gif") ?
@@ -95,6 +100,40 @@ export default class ImageUtils {
                 fs.readFileSync(file);
 
             return await getAverageColor(buffer);
+        }
+    }
+
+    /**
+     * Given a hex color, convert it to HSB.
+     * @param {string} hex - string
+     * @returns [0, 0, 0]
+     */
+    // https://stackoverflow.com/questions/56512436/how-to-sort-colors-of-a-particular-hue
+    public static async hexToHSB(hex: string): Promise<number[] | undefined> {
+        hex = hex.replace(/^#/, '');
+        hex = hex.length === 3 ?
+            hex.replace(/(.)/g, "$1$1")
+            : hex;
+
+        let red: number = parseInt(hex.substring(0, 2), 16) / 255,
+            green = parseInt(hex.substring(2, 2), 16) / 255,
+            blue = parseInt(hex.substring(4, 2), 16) / 255;
+        let cMax: number = Math.max(red, green, blue),
+            cMin = Math.min(red, green, blue),
+            delta = cMax - cMin,
+            saturation = cMax ? (delta / cMax) : 0;
+
+        switch (cMax) {
+            case 0:
+                return [0, 0, 0];
+            case cMin:
+                return [0, 0, cMax];
+            case red:
+                return [60 * (((green - blue) / delta) % 6) || 0, saturation, cMax];
+            case green:
+                return [60 * (((blue - red) / delta) + 2) || 0, saturation, cMax];
+            case blue:
+                return [60 * (((red - green) / delta) + 4) || 0, saturation, cMax];
         }
     }
 
